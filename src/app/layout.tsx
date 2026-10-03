@@ -19,6 +19,10 @@ export const metadata: Metadata = {
   },
   description:
     "BXTrack designs and builds AI products, SaaS platforms, mobile apps, and complex digital systems for ambitious businesses.",
+  icons: {
+    icon: "/seo/favicon.ico",
+    shortcut: "/seo/favicon.ico",
+  },
 };
 
 export default function RootLayout({
