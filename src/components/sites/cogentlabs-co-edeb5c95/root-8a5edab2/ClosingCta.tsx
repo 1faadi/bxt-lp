@@ -1,3 +1,4 @@
+import { CalBookingButton } from "./CalBookingButton";
 import { ArrowUpRightIcon } from "./icons";
 import { Reveal } from "./Reveal";
 
@@ -19,16 +20,12 @@ export function ClosingCta() {
 
         <Reveal className="mt-12 flex flex-col items-start gap-10 sm:mt-16 lg:flex-row lg:items-end lg:justify-between">
           <p className="max-w-xl text-lg leading-8 text-white/60">
-            Tell us what you’re building and we’ll help turn it into a product
-            people actually want to use.
+            We'll help you identify opportunities to improve your business with AI.
           </p>
-          <a
-            href="mailto:info@bxtrack.com"
-            className="group inline-flex min-h-14 items-center gap-8 bg-[#f47820] px-6 py-4 text-sm font-semibold text-[#111111] transition-colors hover:bg-[#ff964c] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#f47820]"
-          >
-            Start a Conversation
-            <ArrowUpRightIcon className="size-5 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
-          </a>
+          <CalBookingButton className="group flex h-12 items-center gap-3 bg-[#f47820] px-5 text-sm font-semibold text-[#111111] transition-colors hover:bg-[#ff964c] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#f47820]">
+            Book an AI Audit
+            <ArrowUpRightIcon className="arrow-shift size-4" />
+          </CalBookingButton>
         </Reveal>
       </div>
     </section>

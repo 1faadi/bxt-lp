@@ -14,7 +14,7 @@ const studies = {
 
 export const dynamicParams = false;
 export function generateStaticParams() {
-  return [...Object.keys(studies), "paymas", "relay-hq", "growth-office", "ai-route-planner"].map((slug) => ({ slug }));
+  return [...Object.keys(studies), "paymas", "relay-hq", "growth-office", "ai-route-planner", "lucidmark", "attock-petroleum", "qubio", "sonik"].map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {

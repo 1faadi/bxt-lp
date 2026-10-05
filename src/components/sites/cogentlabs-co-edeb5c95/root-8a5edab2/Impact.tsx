@@ -51,7 +51,7 @@ function TopographicLines() {
   ];
 
   return (
-    <svg className="pointer-events-none absolute inset-0 h-full w-full opacity-40" viewBox="0 0 1440 700" preserveAspectRatio="none" aria-hidden="true">
+    <svg className="pointer-events-none absolute inset-0 -z-10 h-full w-full opacity-40" viewBox="0 0 1440 700" preserveAspectRatio="none" aria-hidden="true">
       {paths.map((path) => <path key={path} d={path} fill="none" stroke="#8e8e8e" strokeWidth="2" />)}
     </svg>
   );
@@ -59,9 +59,9 @@ function TopographicLines() {
 
 export function Impact() {
   return (
-    <section className="relative isolate overflow-hidden bg-[#050505] px-5 py-24 text-[#f8f7f3] sm:px-8 lg:px-12 lg:py-32" aria-labelledby="impact-title">
+    <section className="relative isolate overflow-hidden bg-[#050505] py-24 text-[#f8f7f3] lg:py-32" aria-labelledby="impact-title">
       <TopographicLines />
-      <div className="relative mx-auto max-w-[1170px]">
+      <div className="shell relative z-10">
         <Reveal>
           <p className="eyebrow text-white/50">What our clients gain</p>
           <h2 id="impact-title" className="mt-5 max-w-3xl text-[42px] font-medium leading-[0.98] tracking-[-0.045em] sm:text-5xl lg:text-[60px]">
@@ -75,7 +75,7 @@ export function Impact() {
         <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:mt-16 lg:grid-cols-4">
           {metrics.map((metric, index) => (
             <Reveal key={metric.detail} delay={index === 0 ? 0 : index === 1 ? 80 : index === 2 ? 160 : 240}>
-              <article className="flex min-h-[292px] flex-col rounded-[14px] border border-white/10 bg-white/[0.13] p-7 backdrop-blur-[2px] sm:p-8">
+              <article className="flex min-h-[292px] flex-col rounded-[14px] border border-white/10 bg-[#262626] p-7 sm:p-8">
                 <div className="flex items-end gap-1">
                   <p className="text-[56px] font-medium leading-[0.82] tracking-[-0.07em] text-[#f47820]">{metric.value}</p>
                   {metric.suffix && <p className="mb-1.5 text-sm text-white/40">{metric.suffix}</p>}

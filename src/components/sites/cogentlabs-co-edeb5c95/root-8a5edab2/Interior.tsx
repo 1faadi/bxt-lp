@@ -10,8 +10,8 @@ export function InteriorHero({ eyebrow, title, intro }: { eyebrow: string; title
           <p className="eyebrow mb-8 text-muted-foreground">{eyebrow}</p>
           <h1 className="display-title max-w-5xl">{title}</h1>
         </Reveal>
-        <Reveal className="lg:col-span-5 lg:col-start-8" delay={80}>
-          <p className="text-lg leading-[1.6] text-muted-foreground md:text-xl">{intro}</p>
+        <Reveal className="lg:col-span-5" delay={80}>
+          <p className="max-w-5xl text-lg leading-[1.6] text-muted-foreground md:text-xl">{intro}</p>
         </Reveal>
       </div>
     </section>

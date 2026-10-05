@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ClosingCta } from "@/components/sites/cogentlabs-co-edeb5c95/root-8a5edab2/ClosingCta";
+import { ArrowLeftIcon } from "@/components/sites/cogentlabs-co-edeb5c95/root-8a5edab2/icons";
 import { SiteFooter } from "@/components/sites/cogentlabs-co-edeb5c95/root-8a5edab2/SiteFooter";
 import { SiteHeader } from "@/components/sites/cogentlabs-co-edeb5c95/root-8a5edab2/SiteHeader";
 import { blogPosts, getBlogPost } from "@/lib/blogs";
@@ -44,8 +45,9 @@ export default async function ArticlePage({
         <div className="mx-auto max-w-3xl px-5 pb-24 pt-36 sm:px-6 sm:pt-44 lg:px-8">
           <Link
             href="/blogs"
-            className="font-mono text-[11px] font-medium uppercase tracking-[0.2em] text-muted-foreground transition-colors hover:text-[#f47820]"
+            className="inline-flex items-center gap-2 font-mono text-[11px] font-medium uppercase tracking-[0.2em] text-muted-foreground transition-colors hover:text-[#f47820]"
           >
+            <ArrowLeftIcon className="size-3.5" />
             All Articles
           </Link>
 
