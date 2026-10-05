@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { ClosingCta } from "@/components/sites/cogentlabs-co-edeb5c95/root-8a5edab2/ClosingCta";
-import { InteriorHero, ProductCanvas } from "@/components/sites/cogentlabs-co-edeb5c95/root-8a5edab2/Interior";
+import { InteriorHero } from "@/components/sites/cogentlabs-co-edeb5c95/root-8a5edab2/Interior";
 import { Reveal } from "@/components/sites/cogentlabs-co-edeb5c95/root-8a5edab2/Reveal";
 import { SiteFooter } from "@/components/sites/cogentlabs-co-edeb5c95/root-8a5edab2/SiteFooter";
 import { SiteHeader } from "@/components/sites/cogentlabs-co-edeb5c95/root-8a5edab2/SiteHeader";
@@ -19,7 +20,7 @@ export default function ServicesPage() {
   return (
     <main>
       <SiteHeader />
-      <InteriorHero eyebrow="SERVICES" title="Technology built to solve real business problems." intro="From an early product decision to a production system, we bring strategy, design, and engineering into one senior team." />
+      <InteriorHero eyebrow="SERVICES" title="AI agents and automation, built for real business work." intro="From an early product decision to a production system, we bring strategy, design, and engineering into one senior team." />
       <section className="section-pad">
         <div className="shell">
           {services.map(([number, title, description, capabilities], index) => (
@@ -38,7 +39,15 @@ export default function ServicesPage() {
       </section>
       <section className="section-pad bg-secondary">
         <div className="shell grid items-center gap-16 lg:grid-cols-2">
-          <Reveal><ProductCanvas variant="signal" /></Reveal>
+          <Reveal>
+            <Image
+              src="/images/services/dashboard-progress.png"
+              alt="Project dashboard showing progress from discovery through launch, active tasks, and a milestone timeline"
+              width={1536}
+              height={1024}
+              className="h-auto w-full"
+            />
+          </Reveal>
           <Reveal delay={80}>
             <p className="eyebrow mb-7 text-muted-foreground">HOW WE WORK</p>
             <h2 className="section-title mb-10">Small senior teams. Clear milestones. No hidden handoffs.</h2>

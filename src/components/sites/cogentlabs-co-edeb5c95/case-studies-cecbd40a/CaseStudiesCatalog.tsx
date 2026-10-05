@@ -6,6 +6,42 @@ import { ProjectVisual } from "../pet-care-petsfirst-25d102cd/BxTrackCaseStudy";
 
 const studies = [
   {
+    category: "SAAS / EVENTS",
+    title: "Sonik",
+    client: "Sonik.fm",
+    result: "EN / ES",
+    outcome: "BOOKING, DASHBOARDS & PAYOUTS",
+    slug: "sonik",
+    visual: "sonik" as const,
+  },
+  {
+    category: "MOBILE / QR",
+    title: "Qubio",
+    client: "Qubio",
+    result: "2 stores",
+    outcome: "DYNAMIC QR CODES ON IOS & ANDROID",
+    slug: "qubio",
+    visual: "qubio" as const,
+  },
+  {
+    category: "ENERGY / CORPORATE",
+    title: "Attock Petroleum",
+    client: "Attock Petroleum Limited",
+    result: "1 site",
+    outcome: "PRODUCTS, STATIONS & INVESTORS",
+    slug: "attock-petroleum",
+    visual: "attock-petroleum" as const,
+  },
+  {
+    category: "SAAS / BUG TRACKING",
+    title: "Lucidmark",
+    client: "Lucidmark",
+    result: "50%",
+    outcome: "FASTER BUG REPORTING",
+    slug: "lucidmark",
+    visual: "lucidmark" as const,
+  },
+  {
     category: "AI RESEARCH",
     title: "PayMAS",
     client: "BXTrack Research",
@@ -48,7 +84,7 @@ export function CaseStudiesCatalog() {
     <>
       <SiteHeader tone="dark" />
       <section className="bg-[#1a1a1a] pt-36 pb-20 text-white sm:pt-40 sm:pb-24">
-        <div className="mx-auto w-[min(100%-40px,1216px)]">
+        <div className="shell">
           <Reveal>
             <p className="font-mono text-[11px] tracking-[.24em] text-[#f47820]">CASE STUDIES</p>
             <h1 className="mt-5 text-[44px] font-semibold leading-none tracking-[-.045em] sm:text-[58px] lg:text-[64px]">
@@ -58,7 +94,7 @@ export function CaseStudiesCatalog() {
         </div>
       </section>
       <section className="bg-white py-14 text-[#1a1a1a] sm:py-16 lg:py-20">
-        <div className="mx-auto w-[min(100%-40px,1216px)]">
+        <div className="shell">
           <Reveal>
             <div className="flex items-center justify-between border-b border-[#e5e5e5] pb-6">
               <p className="font-mono text-[10px] tracking-[.16em] text-[#62626a]">SELECTED BXTRACK BUILDS</p>
@@ -70,7 +106,7 @@ export function CaseStudiesCatalog() {
               <Reveal key={study.slug} delay={index ? 80 : 0}>
                 <Link
                   href={`/case-studies/${study.slug}`}
-                  className="group flex h-full flex-col overflow-hidden rounded-xl border border-[#ececee] bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_28px_rgba(26,26,26,.09)]"
+                  className="group flex h-full flex-col overflow-hidden rounded-none border border-[#ececee] bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_28px_rgba(26,26,26,.09)]"
                 >
                   <div className="relative aspect-[1.6/1] overflow-hidden bg-[#1a1a1a]">
                     <ProjectVisual name={study.visual} />

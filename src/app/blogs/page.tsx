@@ -40,7 +40,7 @@ export default async function BlogsPage({ searchParams }: BlogsPageProps) {
               Field Notes
             </h1>
             <p className="mt-4 max-w-xl text-lg leading-relaxed text-muted-foreground">
-              Working notes on AI, SaaS product loops, and putting autonomous systems to work inside real business workflows.
+              Practical notes on building AI agents, automation and AI-powered products for real businesses.
             </p>
           </header>
 

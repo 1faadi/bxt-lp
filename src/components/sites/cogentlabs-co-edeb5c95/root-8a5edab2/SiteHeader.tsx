@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
+import { CalBookingButton } from "./CalBookingButton";
 import { ArrowUpRightIcon, CloseIcon, MenuIcon } from "./icons";
 
 const navigation = [
@@ -95,19 +96,18 @@ export function SiteHeader({ tone = "light" }: SiteHeaderProps) {
         </nav>
 
         <div className="flex items-center gap-2 sm:gap-3">
-          <Link
-            href="#contact"
+          <CalBookingButton
             className={
               isDark
-                ? "group flex h-10 items-center gap-2 bg-[#f47820] px-3 text-xs font-semibold text-[#1a1a1a] transition-colors hover:bg-white sm:px-4 sm:text-sm"
-                : "group flex h-10 items-center gap-2 bg-[#111111] px-3 text-xs font-semibold text-[#f4f2ec] transition-colors hover:bg-[#f47820] hover:text-[#111111] sm:px-4 sm:text-sm"
+                ? "group flex h-12 items-center gap-3 bg-[#f47820] px-5 text-sm font-semibold text-[#1a1a1a] transition-colors hover:bg-white"
+                : "group flex h-12 items-center gap-3 bg-[#111111] px-5 text-sm font-semibold text-[#f4f2ec] transition-colors hover:bg-[#f47820] hover:text-[#111111]"
             }
             onClick={() => setIsMenuOpen(false)}
           >
-            <span className="hidden sm:inline">Start a Project</span>
-            <span className="sm:hidden">Start</span>
+            <span className="hidden sm:inline">Book an AI Audit</span>
+            <span className="sm:hidden">Book</span>
             <ArrowUpRightIcon className="arrow-shift size-4" />
-          </Link>
+          </CalBookingButton>
           <button
             type="button"
             aria-label={isMenuOpen ? "Close navigation menu" : "Open navigation menu"}

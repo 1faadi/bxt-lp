@@ -27,7 +27,7 @@ function PartnerSet({ hidden = false }: { hidden?: boolean }) {
 export function ClientsPartners() {
   return (
     <section className="overflow-hidden bg-background py-14 sm:py-16 md:py-20" aria-labelledby="clients-partners-title">
-      <div className="mx-auto w-[min(100%-40px,1100px)]">
+      <div className="shell">
         <Reveal>
           <p className="eyebrow text-muted-foreground">Who we work with</p>
           <h2 id="clients-partners-title" className="section-title mt-5 max-w-[620px]">

@@ -25,8 +25,8 @@ const delays = [0, 80, 160] as const;
 
 export function Testimonials() {
   return (
-    <section className="bg-[#eee7dc] px-5 py-20 text-[#171715] sm:px-8 lg:px-12 lg:py-[120px]">
-      <div className="mx-auto max-w-[1440px]">
+    <section className="bg-[#eee7dc] py-20 text-[#171715] lg:py-[120px]">
+      <div className="shell">
         <Reveal>
           <p className="text-[11px] font-medium tracking-[0.22em] text-[#716c63]">
             CLIENT PERSPECTIVES

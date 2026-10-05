@@ -1,0 +1,869 @@
+/*
+  "How we work" process section.
+  Desktop/tablet (>= 820px): four columns under a numbered progress track.
+  Phone: the same track in one row, with a single step card below that swaps.
+  Swap the tokens below to re-theme; illustrations read the same tokens.
+*/
+
+.section {
+  --bg: #f4f2ec;
+  --raised: #faf8f4;
+  --paper: #fffdf9;
+  --ink: #111110;
+  --muted: #6b6760;
+  --muted-2: #847e75;
+  --line: #dcd6cc;
+  --line-strong: #c9c1b4;
+  --neutral: #ebe5dc;
+
+  --accent: #f7822f;
+  --accent-ink: #a84b14;
+  --accent-soft: #fed6b2;
+  --accent-tint: #fff0e3;
+
+  /* illustration palette */
+  --plat-top: #fdfbf7;
+  --plat-left: #efe7dc;
+  --plat-right: #e4d9ca;
+  --plat-inset: #f7f1e9;
+  --pale: #ece4d9;
+  --or-1: #ffd2a8;
+  --or-2: #f9a15a;
+  --or-3: #ee8436;
+  --cream-top: #fde9d6;
+  --cream-left: #f2dcc6;
+  --cream-right: #e8cdb3;
+  --steel: #cfc6ba;
+  --steel-dark: #b5ab9e;
+
+  --sans: var(--font-geist-sans, 'Geist'), ui-sans-serif, system-ui, -apple-system, sans-serif;
+
+  --node: 40px;
+  --gap: 10px;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --back: cubic-bezier(0.34, 1.45, 0.64, 1);
+
+  position: relative;
+  overflow: hidden;
+  color: var(--ink);
+  font-family: var(--sans);
+}
+
+.inner {
+  position: relative;
+}
+
+/* ---------- Background decoration (desktop only) ---------- */
+
+.decor {
+  display: none;
+}
+
+.decorArc {
+  fill: none;
+  stroke: var(--line-strong);
+  stroke-width: 1.2;
+  stroke-dasharray: 2 5;
+  stroke-linecap: round;
+}
+
+.decorDot {
+  fill: #fdb57a;
+}
+
+/* ---------- Header ---------- */
+
+.eyebrow {
+  margin: 0 0 18px;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted-2);
+}
+
+.header {
+  display: grid;
+  gap: 16px;
+  margin-bottom: 36px;
+}
+
+.title {
+  margin: 0;
+  font-size: clamp(38px, 6.2vw, 80px);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.045em;
+  text-wrap: balance;
+}
+
+.lede {
+  margin: 0;
+  max-width: 36ch;
+  font-size: 16px;
+  line-height: 1.55;
+  color: var(--muted);
+  text-wrap: pretty;
+}
+
+/* ---------- Track: nodes, line, chevrons ---------- */
+
+.defs {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+.track,
+.steps {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(0, 1fr);
+  column-gap: var(--gap);
+}
+
+.stop {
+  position: relative;
+  height: var(--node);
+}
+
+.node {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: var(--node);
+  height: var(--node);
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: var(--raised);
+  font: inherit;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.node:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.nodeNum {
+  display: grid;
+  place-items: center;
+  width: calc(var(--node) - 12px);
+  height: calc(var(--node) - 12px);
+  border-radius: 50%;
+  background: var(--neutral);
+  color: var(--muted-2);
+  font-size: 12px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  transition:
+    background-color 0.35s,
+    color 0.35s,
+    transform 0.4s var(--back);
+}
+
+.stop[data-state='done'] .nodeNum {
+  background: var(--accent-soft);
+  color: var(--accent-ink);
+}
+
+.stop[data-state='current'] .nodeNum {
+  background: var(--accent);
+  color: #fff;
+  transform: scale(1.08);
+}
+
+.node::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border: 2px solid var(--accent);
+  border-radius: 50%;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.stop[data-state='current'] .node::after {
+  animation: ping 1.2s var(--ease) infinite;
+}
+
+.line {
+  position: absolute;
+  top: calc(var(--node) / 2 - 4px);
+  left: calc(var(--node) + 6px);
+  width: calc(100% + var(--gap) - var(--node) - 12px);
+  height: 8px;
+  overflow: hidden;
+}
+
+.stop:last-child .line {
+  width: calc(100% - var(--node) - 6px);
+}
+
+.line::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  transform: translateY(-50%);
+  background: var(--line);
+}
+
+.fill {
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  transition: transform 0.35s var(--ease);
+}
+
+.fill::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 3px;
+  height: 2px;
+  border-radius: 2px;
+  transform: translateY(-50%);
+  background: var(--accent);
+}
+
+.fill::after {
+  content: '';
+  position: absolute;
+  top: 1px;
+  right: 0;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.stop[data-state='done'] .fill {
+  transform: translateX(0);
+}
+
+.stop[data-state='current'] .fill {
+  animation: grow var(--dur) linear forwards;
+}
+
+.stop[data-state='current'] .fill::after {
+  opacity: 1;
+}
+
+.chevron {
+  display: none;
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  left: calc(var(--node) + 6px + (100% + var(--gap) - var(--node) - 12px) * 0.7);
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: var(--raised);
+  color: var(--muted-2);
+  transform: translate(-50%, -50%);
+  transition:
+    background-color 0.3s,
+    border-color 0.3s,
+    color 0.3s;
+}
+
+.chevron svg {
+  width: 14px;
+  height: 14px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.stop[data-state='done'] .chevron {
+  border-color: var(--accent-soft);
+  background: var(--accent-tint);
+  color: var(--accent);
+}
+
+.stop[data-state='current'] .chevron {
+  animation: chevronOn var(--dur) linear forwards;
+}
+
+/* ---------- Step cards (phone: one card at a time) ---------- */
+
+.steps {
+  grid-auto-flow: row;
+  grid-auto-columns: auto;
+  margin: 20px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.step {
+  grid-area: 1 / 1;
+  display: grid;
+  grid-template-columns: 140px minmax(0, 1fr);
+  align-items: center;
+  gap: 16px;
+  min-width: 0;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateX(14px);
+  transition:
+    opacity 0.3s,
+    transform 0.4s var(--ease),
+    visibility 0s linear 0.4s;
+}
+
+.step[data-stage='true'] {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  transition:
+    opacity 0.3s,
+    transform 0.4s var(--ease);
+}
+
+.art {
+  position: relative;
+  min-width: 0;
+}
+
+.artSvg {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.copy {
+  min-width: 0;
+}
+
+.stepTitle {
+  margin: 0 0 6px;
+  font-size: 21px;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+}
+
+.stepText {
+  margin: 0;
+  font-size: 14.5px;
+  line-height: 1.55;
+  color: var(--muted);
+  text-wrap: pretty;
+}
+
+.rule {
+  display: block;
+  width: 36px;
+  height: 2px;
+  margin-top: 14px;
+  border-radius: 2px;
+  background: var(--line-strong);
+  transform-origin: left center;
+  transition:
+    background-color 0.35s,
+    transform 0.45s var(--ease);
+}
+
+.step[data-state='done'] .rule {
+  background: var(--accent);
+}
+
+.step[data-state='current'] .rule {
+  background: var(--accent);
+  transform: scaleX(1.6);
+}
+
+/* ---------- Illustration states ---------- */
+
+.glow {
+  opacity: 0.3;
+  transition: opacity 0.5s;
+}
+
+.step[data-state='done'] .glow {
+  opacity: 0.6;
+}
+
+.step[data-state='current'] .glow {
+  opacity: 1;
+}
+
+.platTop {
+  fill: var(--plat-top);
+  stroke: var(--plat-top);
+  stroke-width: 5;
+  stroke-linejoin: round;
+}
+
+.platLeft {
+  fill: var(--plat-left);
+  stroke: var(--plat-left);
+  stroke-width: 5;
+  stroke-linejoin: round;
+}
+
+.platRight {
+  fill: var(--plat-right);
+  stroke: var(--plat-right);
+  stroke-width: 5;
+  stroke-linejoin: round;
+}
+
+.platInset {
+  fill: var(--plat-inset);
+}
+
+.shadow {
+  fill: var(--plat-left);
+}
+
+/* Discover: the bulb lights up and the rays draw out */
+
+.halo {
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: center;
+  transition: opacity 0.4s;
+}
+
+.step[data-state='done'] .halo {
+  opacity: 0.5;
+}
+
+.step[data-state='current'] .halo {
+  opacity: 1;
+  animation: breathe 1.4s ease-in-out infinite;
+}
+
+.bulbOff {
+  fill: var(--pale);
+}
+
+.bulbOn {
+  opacity: 0;
+  transition: opacity 0.35s;
+}
+
+.step[data-state='current'] .bulbOn,
+.step[data-state='done'] .bulbOn {
+  opacity: 1;
+}
+
+.step[data-state='current'] .bulbOn {
+  transition: opacity 0.45s 0.1s;
+}
+
+.shine {
+  fill: none;
+  stroke: #fff;
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  opacity: 0.85;
+}
+
+.cap {
+  fill: var(--steel);
+}
+
+.capLines {
+  fill: none;
+  stroke: var(--steel-dark);
+  stroke-width: 1.2;
+}
+
+.capTip {
+  fill: var(--steel-dark);
+}
+
+.rays path {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  transition: stroke-dashoffset 0.25s;
+}
+
+.step[data-state='current'] .rays path,
+.step[data-state='done'] .rays path {
+  stroke-dashoffset: 0;
+}
+
+.step[data-state='current'] .rays path {
+  transition: stroke-dashoffset 0.4s var(--ease) calc(0.3s + var(--i) * 0.06s);
+}
+
+/* Design: the wireframe fills in */
+
+.panelShadow {
+  fill: var(--plat-left);
+  opacity: 0.6;
+}
+
+.panelSide {
+  fill: var(--plat-right);
+}
+
+.panelTop {
+  fill: var(--plat-left);
+}
+
+.panel {
+  fill: var(--paper);
+  stroke: var(--line);
+  stroke-width: 0.8;
+}
+
+.panelRule {
+  stroke: var(--line);
+  stroke-width: 0.8;
+}
+
+.panelDot {
+  fill: var(--line-strong);
+}
+
+.blockOff {
+  fill: var(--pale);
+}
+
+.blockOn,
+.blockSoft {
+  opacity: 0;
+  transition: opacity 0.25s;
+}
+
+.blockOn {
+  fill: var(--or-2);
+}
+
+.blockSoft {
+  fill: var(--or-1);
+}
+
+.step[data-state='current'] .blockOn,
+.step[data-state='current'] .blockSoft,
+.step[data-state='done'] .blockOn,
+.step[data-state='done'] .blockSoft {
+  opacity: 1;
+}
+
+.step[data-state='current'] .blockOn,
+.step[data-state='current'] .blockSoft {
+  transition: opacity 0.3s calc(0.15s + var(--i) * 0.12s);
+}
+
+/* Build: layers drop onto the stack */
+
+.baseTop {
+  fill: var(--plat-inset);
+}
+
+.baseLeft {
+  fill: var(--plat-left);
+}
+
+.baseRight {
+  fill: var(--plat-right);
+}
+
+.layerTop {
+  fill: var(--or-1);
+}
+
+.layerLeft {
+  fill: var(--or-2);
+}
+
+.layerRight {
+  fill: var(--or-3);
+}
+
+.layer {
+  opacity: 0;
+  transform: translateY(-18px);
+  transition:
+    opacity 0.25s,
+    transform 0.25s;
+}
+
+.step[data-state='current'] .layer,
+.step[data-state='done'] .layer {
+  opacity: 1;
+  transform: none;
+}
+
+.step[data-state='current'] .layer {
+  transition:
+    opacity 0.2s calc(var(--i) * 0.18s),
+    transform 0.5s var(--back) calc(var(--i) * 0.18s);
+}
+
+/* Scale: bars rise out of the platform, then the arrow draws */
+
+.barTop {
+  fill: var(--cream-top);
+}
+
+.barTopHot {
+  fill: var(--or-1);
+}
+
+.barLeft {
+  fill: var(--cream-left);
+}
+
+.barRight {
+  fill: var(--cream-right);
+}
+
+.bar {
+  transform: translateY(var(--sink));
+  transition: transform 0.3s var(--ease);
+}
+
+.step[data-state='current'] .bar,
+.step[data-state='done'] .bar {
+  transform: none;
+}
+
+.step[data-state='current'] .bar {
+  transition: transform 0.55s var(--back) calc(0.1s + var(--i) * 0.09s);
+}
+
+.arrow path {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  transition: stroke-dashoffset 0.2s;
+}
+
+.step[data-state='current'] .arrow path,
+.step[data-state='done'] .arrow path {
+  stroke-dashoffset: 0;
+}
+
+.step[data-state='current'] .arrow path {
+  transition: stroke-dashoffset 0.5s var(--ease) 0.45s;
+}
+
+.step[data-state='current'] .arrow .arrowHead {
+  transition: stroke-dashoffset 0.2s linear 0.9s;
+}
+
+/* Badge */
+
+.badge {
+  transition: transform 0.4s var(--back);
+}
+
+.step[data-state='current'] .badge {
+  transform: translateY(-4px);
+}
+
+.badgeShadow {
+  fill: var(--accent);
+  opacity: 0.1;
+  transition: opacity 0.4s;
+}
+
+.step[data-state='current'] .badgeShadow {
+  opacity: 0.22;
+}
+
+.badgeCard {
+  fill: var(--paper);
+  stroke: #f1e5d8;
+  stroke-width: 1;
+}
+
+.badgeIcon {
+  fill: none;
+  stroke: var(--steel-dark);
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: stroke 0.35s;
+}
+
+.step[data-state='current'] .badgeIcon,
+.step[data-state='done'] .badgeIcon {
+  stroke: var(--accent);
+}
+
+/* ---------- Tablet and desktop: four columns ---------- */
+
+@media (min-width: 820px) {
+  .section {
+    --node: 48px;
+    --gap: 28px;
+  }
+
+  .header {
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 48px;
+    margin-bottom: 56px;
+  }
+
+  .lede {
+    max-width: 300px;
+  }
+
+  .chevron {
+    display: grid;
+  }
+
+  .nodeNum {
+    font-size: 13px;
+  }
+
+  .steps {
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(0, 1fr);
+    margin-top: 0;
+  }
+
+  .step {
+    grid-area: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+  }
+
+  /* Line the platform's left corner up with the node above it. */
+  .art {
+    width: min(100%, 260px);
+    margin-left: calc(var(--node) / 2 - min(100%, 260px) * 0.133);
+  }
+
+  .art::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 13.3%;
+    height: 60%;
+    border-left: 1px dashed var(--line-strong);
+  }
+
+  .copy {
+    margin-top: 14px;
+  }
+
+  .stepTitle {
+    margin-bottom: 10px;
+    font-size: clamp(22px, 2.2vw, 28px);
+  }
+
+  .stepText {
+    max-width: 30ch;
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  .rule {
+    margin-top: 20px;
+  }
+}
+
+@media (min-width: 1100px) {
+  .decor {
+    display: block;
+    position: absolute;
+    top: 24px;
+    right: 0;
+    width: 560px;
+    height: 300px;
+    overflow: visible;
+    pointer-events: none;
+  }
+
+  .stepText {
+    font-size: 16px;
+  }
+}
+
+/* Paused while hovered or off screen. Kept late so it wins over the state rules. */
+.flow[data-paused='true'] .stop .fill,
+.flow[data-paused='true'] .stop .chevron {
+  animation-play-state: paused;
+}
+
+@keyframes grow {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes chevronOn {
+  0%,
+  64% {
+    border-color: var(--line);
+    background-color: var(--raised);
+    color: var(--muted-2);
+  }
+  76%,
+  100% {
+    border-color: var(--accent-soft);
+    background-color: var(--accent-tint);
+    color: var(--accent);
+  }
+}
+
+@keyframes ping {
+  from {
+    opacity: 0.55;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(1.45);
+  }
+}
+
+@keyframes breathe {
+  0%,
+  100% {
+    transform: scale(0.92);
+  }
+  50% {
+    transform: scale(1.06);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .section *,
+  .section *::before,
+  .section *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}

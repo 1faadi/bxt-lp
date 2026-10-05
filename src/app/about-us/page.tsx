@@ -18,11 +18,11 @@ export default function AboutPage() {
   return (
     <main>
       <SiteHeader />
-      <InteriorHero eyebrow="ABOUT US" title="We build technology with purpose." intro="BXTrack is a senior product and engineering studio for organizations turning ambitious ideas into useful, resilient systems." />
+      <InteriorHero eyebrow="ABOUT US" title="We build AI systems that do real work." intro="BXTrack is a senior AI and engineering studio building agents, automation and AI-powered products for growing businesses." />
       <section className="section-pad">
         <div className="shell grid gap-12 lg:grid-cols-12">
-          <Reveal className="lg:col-span-3"><p className="eyebrow text-muted-foreground">OUR STORY</p></Reveal>
-          <Reveal className="lg:col-span-8 lg:col-start-5" delay={80}>
+          <Reveal className="lg:col-span-12"><p className="eyebrow text-muted-foreground">OUR STORY</p></Reveal>
+          <Reveal className="lg:col-span-12" delay={80}>
             <h2 className="section-title mb-10">Built for the space between an important idea and a dependable product.</h2>
             <div className="grid gap-7 text-lg leading-relaxed text-muted-foreground md:grid-cols-2">
               <p>We built BXTrack after seeing strong ideas get diluted by fragmented teams and unnecessary process. Strategy lived in one room, design in another, and engineering arrived after the important decisions were already made.</p>
